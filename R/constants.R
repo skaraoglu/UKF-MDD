@@ -15,7 +15,7 @@ UKF_CONSTANTS <- list(
   # --- Parameter constraints ------------------------------------------------
   PARAM_MIN    = 1e-8,   # Smallest allowed value when forcePositive = TRUE
 
-  # --- Iterative optimisation -----------------------------------------------
+  # --- Iterative optimization -----------------------------------------------
   PARAM_TOL_DEFAULT  = 1e-3,   # Default L2 convergence tolerance
   MAXSTEPS_DEFAULT   = 1000,   # Default maximum iterations
   CHISQ_PLATEAU_TOL  = 1e-8,   # Chi-square change below which we declare plateau
