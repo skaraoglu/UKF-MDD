@@ -193,7 +193,7 @@ print_optim_results <- function(iter_opt,
   if (is.null(param_names))
     param_names <- paste0("param", seq_len(n))
 
-  cat("Iterative Parameter Optimisation Results\n")
+  cat("Iterative Parameter Optimization Results\n")
   cat(strrep("=", 45), "\n")
   cat("Estimated Parameters:\n")
   for (i in seq_len(n))

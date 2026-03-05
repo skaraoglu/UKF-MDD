@@ -45,7 +45,7 @@ source("R/constants.R")
 
   if (!success) {
     if (!requireNamespace("Matrix", quietly = TRUE))
-      stop(label, ": stabilisation failed and package 'Matrix' is unavailable.")
+      stop(label, ": stabilization failed and package 'Matrix' is unavailable.")
     M <- as.matrix(Matrix::nearPD(M)$mat)
   }
   M
@@ -136,7 +136,7 @@ UKF_dT <- function(t_dummy, ode_model, xhat, Pxx, y_obs,
   X      <- propagate_model(t_dummy, ode_model, dt, dT, N_p, Xa)
   xtilde <- rowMeans(X)                          # (N_x x 1)
 
-  # ---- Predicted state covariance (vectorised) -----------------------------
+  # ---- Predicted state covariance (vectorized) -----------------------------
   dX  <- X - xtilde                              # (N_x x N_sigma) deviations
   Pxx <- (dX %*% t(dX)) / N_sigma
 
@@ -145,7 +145,7 @@ UKF_dT <- function(t_dummy, ode_model, xhat, Pxx, y_obs,
   Q[1:N_p, 1:N_p] <- Q_scale * diag(N_p)
   Pxx             <- Pxx + Q
 
-  # ---- Observation prediction (vectorised) ---------------------------------
+  # ---- Observation prediction (vectorized) ---------------------------------
   Y      <- X[(N_p + 1):(N_p + N_y), , drop = FALSE]
   ytilde <- rowMeans(Y)                          # (N_y x 1)
 
@@ -153,7 +153,7 @@ UKF_dT <- function(t_dummy, ode_model, xhat, Pxx, y_obs,
   Pyy <- R + (dY %*% t(dY)) / N_sigma
   Pyy <- .stabilize_pd(Pyy, "Pyy")
 
-  # Cross-covariance (vectorised)
+  # Cross-covariance (vectorized)
   Pxy <- (dX %*% t(dY)) / N_sigma               # (N_x x N_y)
 
   # ---- Kalman gain ---------------------------------------------------------

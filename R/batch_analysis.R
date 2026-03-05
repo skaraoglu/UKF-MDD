@@ -207,10 +207,10 @@ load_cached_results <- function(results_dir = "results") {
 # -----------------------------------------------------------------------------
 #' compute_group_stats
 #'
-#' Summarises estimated parameters across subjects for each region pair.
+#' Summarizes estimated parameters across subjects for each region pair.
 #'
 #' @param results_df  Combined results data frame (all subjects).
-#' @param params      Parameter column names to summarise (default: a, b, k).
+#' @param params      Parameter column names to summarize (default: a, b, k).
 #' @return Grouped summary data frame with mean, SD, 95 % CI, and n.
 #' @export
 compute_group_stats <- function(results_df,

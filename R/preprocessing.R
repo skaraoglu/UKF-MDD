@@ -6,7 +6,7 @@
 # Study context (from paper):
 #   - Harvard-Oxford Atlas, 110 ROIs, 23 MDD subjects
 #   - TR = 2000 ms (exactly), 260 usable volumes per run
-#   - Signals already detrended and standardised by NiftiSpheresMasker
+#   - Signals already detrended and standardized by NiftiSpheresMasker
 #   - BOLD resting-state band of interest: 0.01-0.1 Hz
 #
 # Smoothing strategy:
@@ -22,7 +22,7 @@
 #     "strong"   -> h = 8.8  TRs  (cutoff ~ 0.025 Hz, slow fluctuations only)
 #
 #   WHY LOO-CV WAS REMOVED:
-#     LOO-CV on a kernel smoother minimises in-sample MSE, which decreases
+#     LOO-CV on a kernel smoother minimizes in-sample MSE, which decreases
 #     monotonically as bandwidth decreases (less smoothing = closer to raw).
 #     It always returns bw_min, providing no useful selection. On time series
 #     with temporal autocorrelation (which all BOLD signals have), true
@@ -347,7 +347,7 @@ diagnose_smoothing <- function(signal,
         "Physiological window: [%.1f, %.1f] TRs  |  TR=%.1f s  |  Band: %.2f–%.2f Hz",
         bounds["bw_min"], bounds["bw_max"], TR,
         FMRI_ACQ$BOLD_FREQ_MIN, FMRI_ACQ$BOLD_FREQ_MAX),
-      x = "Time (TR)", y = "Standardised BOLD signal",
+      x = "Time (TR)", y = "Standardized BOLD signal",
       colour = NULL, linewidth = NULL
     ) +
     theme_minimal(base_size = 11) +
