@@ -1,6 +1,6 @@
 # =============================================================================
 # batch_analysis.R
-# Multi-subject, parallelised UKF batch pipeline.
+# Multi-subject, parallelized UKF batch pipeline.
 #
 # Functions:
 #   run_subject_ukf()        -- Run all region pairs for a single subject
@@ -125,7 +125,7 @@ run_subject_ukf <- function(smoothed_df, subj_id, ode_model, N_p,
 # -----------------------------------------------------------------------------
 #' run_all_subjects_ukf
 #'
-#' Parallelised outer loop that calls run_subject_ukf for every subject in
+#' Parallelized outer loop that calls run_subject_ukf for every subject in
 #' data_list.  Uses all available cores minus one.
 #'
 #' @param data_list    Named list of raw data frames (from load_subject_data).
@@ -162,7 +162,7 @@ run_all_subjects_ukf <- function(data_list, ode_model, N_p,
     .export   = c("run_subject_ukf", "smooth_subject_data",
                   "build_region_pairs", "prepare_ukf_input",
                   "iterative_param_optim", "UKF_blend", "UKF_dT",
-                  "propagate_model", ".stabilise_pd", "UKF_CONSTANTS"),
+                  "propagate_model", ".stabilize_pd", "UKF_CONSTANTS"),
     .errorhandling = "pass"
   ) %dopar% {
     source("R/constants.R")     # re-source inside worker

@@ -194,7 +194,7 @@ plot_parameter_distributions <- function(results_df) {
 # -----------------------------------------------------------------------------
 #' plot_parameter_heatmap
 #'
-#' Visualises one parameter (e.g. coupling k) as a symmetric region × region
+#' Visualizes one parameter (e.g. coupling k) as a symmetric region × region
 #' heatmap.  Region pairs not present are shown as NA.
 #'
 #' @param results_df   Data frame with columns Region_Pair, and the param.

@@ -9,7 +9,7 @@
 #
 # Bugs fixed vs. original:
 #   - pracma dependency made explicit (loaded in main script)
-#   - Noise injection matrix dimensions generalised from hardcoded N_y=2
+#   - Noise injection matrix dimensions generalized from hardcoded N_y=2
 #   - Chi-square computed against clean smoothed data, not against noisy x
 #   - Cholesky jitter loop extracted to helper for DRY code
 #   - forcePositive clamp applied to ALL parameter rows uniformly
@@ -22,8 +22,8 @@ source("R/constants.R")
 # -----------------------------------------------------------------------------
 # Internal helper: make a square matrix positive-definite via adaptive jitter,
 # falling back to Matrix::nearPD if jitter alone is insufficient.
-# Returns the stabilised matrix.
-.stabilise_pd <- function(M, label = "M") {
+# Returns the stabilized matrix.
+.stabilize_pd <- function(M, label = "M") {
   n       <- nrow(M)
   jitter  <- 0
   success <- FALSE
@@ -123,7 +123,7 @@ UKF_dT <- function(t_dummy, ode_model, xhat, Pxx, y_obs,
   N_sigma <- 2L * N_x
 
   # ---- Sigma points --------------------------------------------------------
-  Pxx   <- .stabilise_pd(Pxx, "Pxx")
+  Pxx   <- .stabilize_pd(Pxx, "Pxx")
   S     <- tryCatch(t(chol(N_x * Pxx, pivot = TRUE)),
                     error = function(e) {
                       Pxx_pd <- as.matrix(Matrix::nearPD(N_x * Pxx)$mat)
@@ -151,7 +151,7 @@ UKF_dT <- function(t_dummy, ode_model, xhat, Pxx, y_obs,
 
   dY  <- Y - ytilde                              # (N_y x N_sigma) deviations
   Pyy <- R + (dY %*% t(dY)) / N_sigma
-  Pyy <- .stabilise_pd(Pyy, "Pyy")
+  Pyy <- .stabilize_pd(Pyy, "Pyy")
 
   # Cross-covariance (vectorised)
   Pxy <- (dX %*% t(dY)) / N_sigma               # (N_x x N_y)
@@ -168,7 +168,7 @@ UKF_dT <- function(t_dummy, ode_model, xhat, Pxx, y_obs,
 
   # ---- Covariance update ---------------------------------------------------
   Pxx <- Pxx - K %*% t(Pxy)
-  Pxx <- .stabilise_pd(Pxx, "Pxx post-update")
+  Pxx <- .stabilize_pd(Pxx, "Pxx post-update")
 
   list(xhat = xhat, Pxx = Pxx, K = K)
 }
@@ -215,7 +215,7 @@ UKF_blend <- function(t_dummy, ts_data, ode_model, N_p, N_y,
   N_x       <- N_p + N_y
   clean_obs <- t(ts_data[, -1, drop = FALSE])    # (N_y x T) — used for chi-sq
 
-  # --- Initialise storage ---------------------------------------------------
+  # --- Initialize storage ---------------------------------------------------
   xhat   <- matrix(0, nrow = N_x, ncol = num_time)
   Pxx    <- vector("list", num_time)
   Ks     <- vector("list", num_time)
