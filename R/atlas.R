@@ -2,7 +2,7 @@
 # atlas.R
 # Harvard-Oxford Atlas (HOA) — 110 region MNI coordinates and lobe assignments
 # Coordinates sourced from braingraph library via paper appendix (test.tex).
-# Used for anatomical node placement in brain network visualisations.
+# Used for anatomical node placement in brain network visualizations.
 # =============================================================================
 
 HOA_ATLAS <- data.frame(
