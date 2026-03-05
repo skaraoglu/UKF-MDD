@@ -1,10 +1,10 @@
 # =============================================================================
 # optim.R
-# Parameter optimisation wrappers around UKF_blend.
+# Parameter optimization wrappers around UKF_blend.
 #
 # Functions:
 #   iterative_param_optim()  -- Repeated UKF passes until convergence
-#   optim_params()           -- optim()-based (L-BFGS-B or SANN) outer optimiser
+#   optim_params()           -- optim()-based (L-BFGS-B or SANN) outer optimizer
 #
 # Bugs fixed vs. original:
 #   - Convergence norm changed from abs(sum(diff)) to true L2 norm
@@ -120,7 +120,7 @@ iterative_param_optim <- function(param_guess,
 # -----------------------------------------------------------------------------
 #' optim_params
 #'
-#' Wraps optim() (L-BFGS-B or SANN) around UKF_blend to minimise chi-square
+#' Wraps optim() (L-BFGS-B or SANN) around UKF_blend to minimize chi-square
 #' as an outer objective function.  Less efficient than iterative_param_optim
 #' for smooth problems but useful for non-convex landscapes.
 #'
