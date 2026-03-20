@@ -30,10 +30,10 @@ We fit a **Stuart-Landau oscillator** (the normal form of a supercritical Hopf b
 
 ```
     a < 0              a = 0              a > 0
- ───────────────────────┼───────────────────────
+  ───────────────────────┼───────────────────────
   Subcritical        Critical         Supercritical
   (noise-driven)    (phase transition)  (limit cycle)
-       ◂── MDD ──▸     ▲
+        ◂── MDD ──▸     ▲
                         │
                     therapeutic
                       target
@@ -58,7 +58,7 @@ We fit a **Stuart-Landau oscillator** (the normal form of a supercritical Hopf b
 **Neurofeedback Protocol**
 - Active: left amygdala upregulation
 - Sham: left intraparietal sulcus (control)
-- Double-blind, randomised assignment
+- Double-blind, randomized assignment
 
 </td>
 <td width="50%">
@@ -83,24 +83,24 @@ We fit a **Stuart-Landau oscillator** (the normal form of a supercritical Hopf b
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                         parcellate_219roi_v3.ipynb                        │
+│                         parcellate_219roi_v3.ipynb                       │
 │  AFNI .BRIK/.HEAD  ──▸  Atlas construction  ──▸  ROI time-series CSVs    │
 └───────────────────────────────────┬──────────────────────────────────────┘
                                     │
                                     ▼
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                          mdd_analysis_v3.ipynb                            │
+│                          mdd_analysis_v3.ipynb                           │
 │                                                                          │
 │  ┌─────────────┐    ┌──────────────────┐    ┌────────────────────────┐   │
-│  │  Stage 1     │    │  Stage 2a        │    │  Stage 2c              │   │
-│  │  SL-UKF      │──▸ │  K identifiab.   │    │  mOU Lasso-MVAR        │   │
-│  │  a, ω per    │    │  → PLV fallback   │    │  effective connectivity │   │
-│  │  ROI         │    └──────────────────┘    └────────────────────────┘   │
+│  │  Stage 1    │    │  Stage 2a        │    │  Stage 2c              │   │
+│  │  SL-UKF     │──▸ │  K identifiab.   │    │  mOU Lasso-MVAR        │   │
+│  │  a, ω per   │    │  → PLV fallback  │    │  effective connectivity│   │
+│  │  ROI        │    └──────────────────┘    └────────────────────────┘   │
 │  └──────┬──────┘              │                         │                │
 │         │                     ▼                         ▼                │
 │         │            ┌────────────────┐       ┌──────────────────┐       │
-│         │            │  PLV matrices   │       │  Brain graphs     │       │
-│         │            │  (216 × 216)    │       │  Topology metrics │       │
+│         │            │  PLV matrices  │       │  Brain graphs    │       │
+│         │            │  (216 × 216)   │       │  Topology metrics│       │
 │         │            └────────────────┘       └──────────────────┘       │
 │         ▼                                                                │
 │  ┌──────────────────────────────────────────────────────────────────┐    │
@@ -141,7 +141,7 @@ where $z = x + iy$ is the analytic signal (BOLD + Hilbert transform), $a$ is the
 ├── R/
 │   ├── sl_models.R                # Stuart-Landau ODE definitions
 │   ├── ukf_engine.R               # Unscented Kalman Filter core
-│   ├── optim.R                    # Iterative & L-BFGS-B optimisation
+│   ├── optim.R                    # Iterative & L-BFGS-B optimization
 │   ├── preprocessing.R            # Smoothing & signal conditioning
 │   └── constants.R                # UKF tuning constants
 ├── data/
@@ -173,13 +173,13 @@ where $z = x + iy$ is the analytic signal (BOLD + Hilbert transform), $a$ is the
 
 ## Key Technical Features
 
-**Stuart-Landau UKF**  — RK4-integrated sigma-point Kalman filter for joint state-parameter estimation from the BOLD analytic signal. Fixed-$\omega$ variant resolves the $a$–$\omega$ identifiability trade-off.
+**Stuart-Landau UKF**  — RK4-integrated sigma-point Kalman filter for joint state-parameter estimation from the BOLD analytic signal. Fixed - $\omega$ variant resolves the $a$ – $\omega$ identifiability trade-off.
 
 **Dual-atlas validation** — Every subject-level result is independently replicated on a second atlas (Schaefer+Melbourne 216-ROI vs Harvard-Oxford 110-ROI) with no shared ROIs or processing code.
 
-**Hilbert analytic signal** — FFT-based Hilbert transform with amplitude normalisation provides both UKF observation channels ($x$, $y$) and instantaneous phase for PLV computation. Edge trimming (5 TRs) mitigates periodicity artifacts.
+**Hilbert analytic signal** — FFT-based Hilbert transform with amplitude normalization provides both UKF observation channels ($x$, $y$) and instantaneous phase for PLV computation. Edge trimming (5 TRs) mitigates periodicity artifacts.
 
-**Linearisation coherence** — In the subcritical regime, the Stuart-Landau cubic term vanishes and the model reduces to multivariate Ornstein-Uhlenbeck. The mOU-MVAR connectivity pipeline is therefore not an independent model choice but the *linearisation* of the SL dynamics confirmed by Stage 1.
+**Linearization coherence** — In the subcritical regime, the Stuart-Landau cubic term vanishes and the model reduces to multivariate Ornstein-Uhlenbeck. The mOU-MVAR connectivity pipeline is therefore not an independent model choice but the *linearization* of the SL dynamics confirmed by Stage 1.
 
 ---
 
